@@ -1,9 +1,14 @@
 version: "3.9"
 services:
+  redis:
+    image: "redis:alpine"
+    networks:
+      - backend
+
   web:
     build: services/frontend
     ports:
-      - "5000:5000"
+      - "3000:3000"
     networks:
       - frontend
       - backend
@@ -19,11 +24,6 @@ services:
     build: services/writer
     ports:
       - "8080:8080"
-    networks:
-      - backend
-
-  redis:
-    image: "redis:alpine"
     networks:
       - backend
 
